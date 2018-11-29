@@ -19,11 +19,11 @@
 #include <peripheral_io.h>
 #include <unistd.h>
 
+extern bool terminate_yield_thread;
+
 extern int resource_switch_close(void);
 extern int resource_switch_open(void);
 extern void resource_camera_close(void);
-
-extern bool terminate_yield_thread;
 extern int init_mqtt(void);
 
 #define MAX_RETRY_COUNT	100

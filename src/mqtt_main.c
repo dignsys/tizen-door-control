@@ -41,7 +41,6 @@
 
 #include <peripheral_io.h>
 #include "resource/resource_servo_motor.h"
-#include <Ecore.h>
 
 #define TIMER_EVENT_INTERVAL	(2.0f)	// event timer : 2 seconds interval
 
@@ -96,24 +95,7 @@ bool terminate_yield_thread;
 pthread_t yield_thread;
 bool mqtt_initalized = false;
 
-Ecore_Timer *event_timer = NULL;
-
-
 extern peripheral_error_e resource_motor_driving(door_state_e mode);
-
-static Eina_Bool _timer_interval_event_cb(void *data)
-{
-	int ret = 0;
-
-	// close door
-	INFO("Closing Door\n");
-	ret = resource_motor_driving(DOOR_STATE_CLOSING);
-	if (ret != 0) {
-		ERR("error resource_motor_driving : ret = %d", ret);
-	}
-	// cancel periodic event timer operation
-	return ECORE_CALLBACK_CANCEL;
-}
 
 
 bool process_command(int length, char *cmd)
@@ -122,24 +104,22 @@ bool process_command(int length, char *cmd)
 
 	if (strcmp(cmd, "DOOR_OPEN") == 0)
 	{
-		INFO("process_command : %s", cmd);
 		// open door
 		INFO("Opening Door\n");
 		ret = resource_motor_driving(DOOR_STATE_OPENING);
 		if (ret != 0) {
 			ERR("error resource_motor_driving : ret = %d", ret);
-			// cancel periodic event timer operation
-			return ECORE_CALLBACK_CANCEL;
-		}
-
-		// create timer event function
-		event_timer = ecore_timer_add(TIMER_EVENT_INTERVAL, _timer_interval_event_cb, NULL);
-		if (!event_timer) {
-			ERR("Failed to add event_timer");
 			return false;
 		}
-	}
-	else {
+	} else if (strcmp(cmd, "DOOR_CLOSE") == 0) {
+		// close door
+		INFO("Closing Door\n");
+		ret = resource_motor_driving(DOOR_STATE_CLOSING);
+		if (ret != 0) {
+			ERR("error resource_motor_driving : ret = %d", ret);
+			return false;
+		}
+	} else {
 		INFO("unknown cmd : %s", cmd);
 	}
 
