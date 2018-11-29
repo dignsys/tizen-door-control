@@ -54,7 +54,7 @@
 
 extern int notify_mqtt(char *url);
 
-const char *s3_url = "https://s3.ap-northeast-2.amazonaws.com/tizen.s3.camera.testbucket2";
+//const char *s3_url = "https://s3.ap-northeast-2.amazonaws.com/tizen.s3.camera.testbucket2";
 
 
 // Some Windows stuff
@@ -1588,7 +1588,7 @@ int simple_put_object(char* bucketName, char *key, char *filename)
 
 	char app_file_path[128] = {0,};
 	char *data_path = NULL;
-	char upload_file_path[128] = {0,};
+//	char upload_file_path[128] = {0,};
 
 	data_path = app_get_data_path();
 	snprintf(app_file_path, PATH_MAX, "%s%s", data_path, filename);
@@ -1597,10 +1597,10 @@ int simple_put_object(char* bucketName, char *key, char *filename)
 
 	INFO("file [%s] upload ...", app_file_path);
 
-	/* upload to this place */
-	snprintf(upload_file_path, sizeof(upload_file_path), "%s/%s", s3_url, filename);
-
-	INFO("upload path - [%s]", upload_file_path);
+//	/* upload to this place */
+//	snprintf(upload_file_path, sizeof(upload_file_path), "%s/%s", s3_url, filename);
+//
+//	INFO("upload path - [%s]", upload_file_path);
 
     data.infile = 0;
     data.gb = 0;
@@ -1704,7 +1704,8 @@ int simple_put_object(char* bucketName, char *key, char *filename)
 
     S3_deinitialize();
 
-    notify_mqtt(upload_file_path);
+//    notify_mqtt(upload_file_path);
+    notify_mqtt(filename);
 
     return 0;
 }

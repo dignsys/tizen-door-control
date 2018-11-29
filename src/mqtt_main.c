@@ -168,7 +168,7 @@ void disconnectCallbackHandler(AWS_IoT_Client *pClient, void *data) {
 	}
 }
 
-int notify_mqtt(char *url)
+int notify_mqtt(char *filename)
 {
 	IoT_Publish_Message_Params paramsQOS0;
 	IoT_Error_t rc = FAILURE;
@@ -178,13 +178,13 @@ int notify_mqtt(char *url)
 		return 0;
 	}
 
-	INFO("url : %s", url);
+	INFO("notify filename : %s", filename);
 
 	paramsQOS0.qos = QOS0;
-	paramsQOS0.payload = (void *) url;
+	paramsQOS0.payload = (void *) filename;
 	paramsQOS0.isRetained = 0;
 
-	paramsQOS0.payloadLen = strlen(url);
+	paramsQOS0.payloadLen = strlen(filename);
 
 	INFO("publish %d : %s", paramsQOS0.payloadLen, paramsQOS0.payload);
 	rc = aws_iot_mqtt_publish(&client, TOPIC_PUB, strlen(TOPIC_PUB), &paramsQOS0);
