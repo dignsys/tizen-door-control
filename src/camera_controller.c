@@ -32,8 +32,6 @@ typedef struct app_data_s {
 } app_data;
 
 extern int simple_put_object(char* bucketName, char *key, char *filename);
-extern int s3main(void);
-
 
 static long long int __get_monotonic_ms(void)
 {

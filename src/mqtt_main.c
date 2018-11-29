@@ -18,7 +18,7 @@
  * @brief simple MQTT publish and subscribe on the same topic using the SDK as a library
  *
  * This example takes the parameters from the aws_iot_config.h file and establishes a connection to the AWS IoT MQTT Platform.
- * It subscribes and publishes to the same topic - "tizen/sub"
+ * It subscribes to the topic "tizen/cmd" and publishes to the topic "tizen/notify"
  *
  * If all the certs are correct, you should see the messages received by the application in a loop.
  *
