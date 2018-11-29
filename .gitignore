@@ -1,0 +1,5 @@
+/Debug/
+/SA_Report/
+/res/certs/*.crt
+/res/certs/*.key
+/res/certs/*.pem

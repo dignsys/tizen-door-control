@@ -1,0 +1,11 @@
+APPNAME = door_control
+
+type = app
+profile = tizeniotarmvlv-4.0
+
+USER_SRCS = src/door_control.c
+USER_DEFS =
+USER_INC_DIRS = inc
+USER_OBJS =
+USER_LIBS =
+USER_EDCS =
