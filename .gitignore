@@ -3,3 +3,5 @@
 /res/certs/*.crt
 /res/certs/*.key
 /res/certs/*.pem
+/inc/aws_iot_config.h
+/inc/s3_config.h
