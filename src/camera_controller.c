@@ -23,6 +23,7 @@
 //#include "s3_config.h"
 
 #define IMAGE_FILE_PREFIX "CAM_"
+#define IMAGE_FILE_POSTFIX "doorcamera.jpg"
 
 // AWS S3 bucket name  -------------------------------------------------------
 char *S3_BUCKET_NAME = "tizen.s3.camera.testbucket2";
@@ -82,7 +83,7 @@ void resource_camera_capture_completed_cb(const void *image, unsigned int size, 
 	char filename[PATH_MAX] = {'\0', };
 	int ret = 0;
 
-	snprintf(filename, PATH_MAX, "%s%lld.jpg", IMAGE_FILE_PREFIX, __get_monotonic_ms());
+	snprintf(filename, PATH_MAX, "%s%s", IMAGE_FILE_PREFIX, IMAGE_FILE_POSTFIX);
 
 	ret = __image_data_to_file(filename, image, size);
 	if (ret != 0) {
@@ -90,9 +91,6 @@ void resource_camera_capture_completed_cb(const void *image, unsigned int size, 
 		return;
 	} else {
 		INFO("image [%s] saved...", filename);
-
-		//s3main();
-
 
 		ret = simple_put_object(S3_BUCKET_NAME, filename, filename);
 		if (ret != 0) {
