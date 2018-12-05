@@ -26,7 +26,7 @@
 #define IMAGE_FILE_POSTFIX "doorcamera.jpg"
 
 // AWS S3 bucket name  -------------------------------------------------------
-char *S3_BUCKET_NAME = "tizen.s3.camera.testbucket2";
+char *S3_BUCKET_NAME = "<YOUR BUCKET NAME>";
 
 typedef struct app_data_s {
 	Ecore_Timer *event_timer;
