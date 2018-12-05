@@ -29,13 +29,11 @@ static void interrupted_cb(peripheral_gpio_h gpio_h, peripheral_error_e error, v
 {
 	int ret = PERIPHERAL_ERROR_NONE;
 
-#if 1
 	// disable interrupt callback
 	ret = peripheral_gpio_set_edge_mode(gpio_h, PERIPHERAL_GPIO_EDGE_NONE);
 	if (ret != PERIPHERAL_ERROR_NONE) {
 		ERR("peripheral_gpio_set_edge_mode failed, ret=[%d]", ret);
 	}
-#endif
 
 	uint32_t value;
 	peripheral_gpio_read(gpio_h, &value);
@@ -49,13 +47,11 @@ static void interrupted_cb(peripheral_gpio_h gpio_h, peripheral_error_e error, v
 		}
 	}
 
-#if 1
 	// enable interrupt again
 	ret = peripheral_gpio_set_edge_mode(gpio_h, PERIPHERAL_GPIO_EDGE_RISING);
 	if (ret != PERIPHERAL_ERROR_NONE) {
 		ERR("peripheral_gpio_set_edge_mode failed, ret=[%d]", ret);
 	}
-#endif
 }
 
 int resource_switch_close(void)
